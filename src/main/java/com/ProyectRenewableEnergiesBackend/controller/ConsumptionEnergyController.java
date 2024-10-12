@@ -1,5 +1,6 @@
 package com.ProyectRenewableEnergiesBackend.controller;
 
+import com.ProyectRenewableEnergiesBackend.DTO.ConsumptionEnergyRequest;
 import com.ProyectRenewableEnergiesBackend.model.ConsumptionEnergy;
 import com.ProyectRenewableEnergiesBackend.service.ConsumptionEnergyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,9 @@ public class ConsumptionEnergyController {
     @Autowired
     private ConsumptionEnergyService consumptionEnergyService;
 
-
     @PostMapping
-    public ResponseEntity<ConsumptionEnergy> add(@RequestBody ConsumptionEnergy consumption) {
-        ConsumptionEnergy newConsumptionEnergy = consumptionEnergyService.add(consumption);
+    public ResponseEntity<ConsumptionEnergy> add(@RequestBody ConsumptionEnergyRequest consumption) {
+        ConsumptionEnergy newConsumptionEnergy = consumptionEnergyService.CreateconsumptionEnergy(consumption);
         return new ResponseEntity<>(newConsumptionEnergy, HttpStatus.CREATED);
     }
 
