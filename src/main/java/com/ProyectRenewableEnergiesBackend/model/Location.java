@@ -16,23 +16,14 @@ public class Location {
     @Column(nullable = false)
     private Integer year;
 
-    @OneToMany(targetEntity = ProductionEnergy.class, fetch = FetchType.LAZY, mappedBy = "location")
-    @JsonBackReference // evitar el problema de anidación en la serialización
-    private List<ProductionEnergy> productionList;
-
-    @OneToMany(targetEntity = ConsumptionEnergy.class, fetch = FetchType.LAZY, mappedBy = "location")
-    @JsonBackReference //evitar el problema de anidación en la serialización
-    private List<ConsumptionEnergy> consumptionList;
 
     public Location() {
     }
 
-    public Location(int id, String name, Integer year, List<ProductionEnergy> productionList, List<ConsumptionEnergy> consumptionList) {
+    public Location(int id, String name, Integer year) {
         this.id = id;
         this.name = name;
         this.year = year;
-        this.productionList = productionList;
-        this.consumptionList = consumptionList;
     }
 
     public Integer getId() {
@@ -59,30 +50,12 @@ public class Location {
         this.year = year;
     }
 
-    public List<ProductionEnergy> getProductionList() {
-        return productionList;
-    }
-
-    public void setProductionList(List<ProductionEnergy> productionList) {
-        this.productionList = productionList;
-    }
-
-    public List<ConsumptionEnergy> getConsumptionList() {
-        return consumptionList;
-    }
-
-    public void setConsumptionList(List<ConsumptionEnergy> consumptionList) {
-        this.consumptionList = consumptionList;
-    }
-
     @Override
     public String toString() {
         return "Location{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", year=" + year +
-                ", productionList=" + productionList +
-                ", consumptionList=" + consumptionList +
                 '}';
     }
 }

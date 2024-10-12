@@ -13,18 +13,14 @@ public class ProductionEnergy {
     private TypeEnergy type_energy;
     private Double value;
 
-    @ManyToOne(targetEntity = Location.class)
-    @JsonBackReference // evitar el problema de anidación en la serialización
-    private Location location;
 
     public ProductionEnergy() {
     }
 
-    public ProductionEnergy(int id, TypeEnergy type_energy, Double value, Location location) {
+    public ProductionEnergy(int id, TypeEnergy type_energy, Double value) {
         this.id = id;
         this.type_energy = type_energy;
         this.value = value;
-        this.location = location;
     }
 
     public Integer getId() {
@@ -51,11 +47,4 @@ public class ProductionEnergy {
         this.value = value;
     }
 
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
 }
