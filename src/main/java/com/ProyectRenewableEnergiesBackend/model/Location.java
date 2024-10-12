@@ -1,6 +1,7 @@
 package com.ProyectRenewableEnergiesBackend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
         import java.util.List;
@@ -16,14 +17,23 @@ public class Location {
     @Column(nullable = false)
     private Integer year;
 
+    @OneToMany(targetEntity = ProductionEnergy.class, fetch = FetchType.LAZY, mappedBy = "location")
+    @JsonIgnore
+    private List<ProductionEnergy> productionEnergyList;
+
+    @OneToMany(targetEntity = ConsumptionEnergy.class, fetch = FetchType.LAZY, mappedBy = "location")
+    @JsonIgnore
+    private List<ConsumptionEnergy> consumptionEnergyList;
 
     public Location() {
     }
 
-    public Location(int id, String name, Integer year) {
+    public Location(Integer id, String name, Integer year, List<ProductionEnergy> productionEnergyList, List<ConsumptionEnergy> consumptionEnergyList) {
         this.id = id;
         this.name = name;
         this.year = year;
+        this.productionEnergyList = productionEnergyList;
+        this.consumptionEnergyList = consumptionEnergyList;
     }
 
     public Integer getId() {
@@ -50,12 +60,19 @@ public class Location {
         this.year = year;
     }
 
-    @Override
-    public String toString() {
-        return "Location{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", year=" + year +
-                '}';
+    public List<ProductionEnergy> getProductionEnergyList() {
+        return productionEnergyList;
+    }
+
+    public void setProductionEnergyList(List<ProductionEnergy> productionEnergyList) {
+        this.productionEnergyList = productionEnergyList;
+    }
+
+    public List<ConsumptionEnergy> getConsumptionEnergyList() {
+        return consumptionEnergyList;
+    }
+
+    public void setConsumptionEnergyList(List<ConsumptionEnergy> consumptionEnergyList) {
+        this.consumptionEnergyList = consumptionEnergyList;
     }
 }

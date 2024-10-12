@@ -13,13 +13,17 @@ public class ConsumptionEnergy {
     private TypeEnergy type_energy;
     private Double value;
 
+    @ManyToOne(targetEntity = Location.class)
+    private Location location;
+
     public ConsumptionEnergy() {
     }
 
-    public ConsumptionEnergy(Integer id, TypeEnergy type_energy, Double value) {
+    public ConsumptionEnergy(Integer id, TypeEnergy type_energy, Double value, Location location) {
         this.id = id;
         this.type_energy = type_energy;
         this.value = value;
+        this.location = location;
     }
 
     public Integer getId() {
@@ -46,12 +50,11 @@ public class ConsumptionEnergy {
         this.value = value;
     }
 
-    @Override
-    public String toString() {
-        return "ConsumptionEnergy{" +
-                "id=" + id +
-                ", type_energy=" + type_energy +
-                ", value=" + value +
-                '}';
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }
