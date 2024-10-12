@@ -1,6 +1,11 @@
 package com.ProyectRenewableEnergiesBackend.service;
 
+import com.ProyectRenewableEnergiesBackend.DTO.ProductionEnergyRequest;
+import com.ProyectRenewableEnergiesBackend.model.ConsumptionEnergy;
+import com.ProyectRenewableEnergiesBackend.model.Location;
 import com.ProyectRenewableEnergiesBackend.model.ProductionEnergy;
+import com.ProyectRenewableEnergiesBackend.model.TypeEnergy;
+import com.ProyectRenewableEnergiesBackend.repository.ConsumptionEnergyRepository;
 import com.ProyectRenewableEnergiesBackend.repository.ProductionEnergyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +18,8 @@ public class ProductionEnergyService {
 
     @Autowired
     private ProductionEnergyRepository productionEnergyRepository;
+    @Autowired
+    private LocationService locationService;
 
 
     public ProductionEnergy add(ProductionEnergy production) {
@@ -40,5 +47,18 @@ public class ProductionEnergyService {
 
     public void deleteById(int id) {
         productionEnergyRepository.deleteById(id);
+    }
+
+    public ProductionEnergy createProductionEnergy(ProductionEnergyRequest production) {
+        Optional<Location> location = locationService.getLocationsByNameAndYear(
+                production.getCountry(), production.getYear()
+        );
+
+        ProductionEnergy productionEnergy = new ProductionEnergy();
+        productionEnergy.setType_energy(production.getType_energy());
+        productionEnergy.setValue(production.getValue());
+        location.ifPresent(productionEnergy::setLocation);
+
+        return productionEnergyRepository.save(productionEnergy);
     }
 }

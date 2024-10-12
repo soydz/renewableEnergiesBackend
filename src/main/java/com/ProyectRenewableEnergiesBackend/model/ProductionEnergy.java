@@ -58,4 +58,14 @@ public class ProductionEnergy {
     public void setLocation(Location location) {
         this.location = location;
     }
+
+    @Override
+    public String toString() {
+        return "ProductionEnergy{" +
+                "id=" + id +
+                ", type_energy=" + type_energy +
+                ", value=" + value +
+                ", location=" + location +
+                '}';
+    }
 }

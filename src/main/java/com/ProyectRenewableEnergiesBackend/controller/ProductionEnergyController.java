@@ -1,6 +1,9 @@
 package com.ProyectRenewableEnergiesBackend.controller;
 
+import com.ProyectRenewableEnergiesBackend.DTO.ProductionEnergyRequest;
+import com.ProyectRenewableEnergiesBackend.model.Location;
 import com.ProyectRenewableEnergiesBackend.model.ProductionEnergy;
+import com.ProyectRenewableEnergiesBackend.service.LocationService;
 import com.ProyectRenewableEnergiesBackend.service.ProductionEnergyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,11 +18,13 @@ import java.util.Optional;
 public class ProductionEnergyController {
 
     @Autowired
-    ProductionEnergyService productionEnergyService;
+    private ProductionEnergyService productionEnergyService;
+    @Autowired
+    private LocationService locationService;
 
     @PostMapping
-    public ResponseEntity<ProductionEnergy> add(@RequestBody ProductionEnergy production) {
-        ProductionEnergy newProductionEnergy = productionEnergyService.add(production);
+    public ResponseEntity<ProductionEnergy> add(@RequestBody ProductionEnergyRequest production) {
+        ProductionEnergy newProductionEnergy = productionEnergyService.createProductionEnergy(production);
         return new ResponseEntity<>(newProductionEnergy, HttpStatus.CREATED);
     }
 

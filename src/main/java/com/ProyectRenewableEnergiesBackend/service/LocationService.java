@@ -48,7 +48,7 @@ public class LocationService {
         return locationRepository.existsByNameAndYear(name, year);
     }
 
-    public Location getLocationsByNameAndYear(String name, Integer year) {
+    public Optional<Location> getLocationsByNameAndYear(String name, Integer year) {
         return locationRepository.findByNameAndYear(name, year);
     }
 }

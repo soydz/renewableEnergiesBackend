@@ -55,7 +55,7 @@ public class LocationController {
     }
 
     @GetMapping("/{name}/{year}")
-    public Location find(@PathVariable("name") String name, @PathVariable("year") int year) {
+    public Optional<Location> find(@PathVariable("name") String name, @PathVariable("year") int year) {
         return locationService.getLocationsByNameAndYear(name, year);
     }
 }
