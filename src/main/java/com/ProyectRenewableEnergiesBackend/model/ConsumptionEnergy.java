@@ -16,7 +16,7 @@ public class ConsumptionEnergy {
     public ConsumptionEnergy() {
     }
 
-    public ConsumptionEnergy(int id, TypeEnergy type_energy, Double value) {
+    public ConsumptionEnergy(Integer id, TypeEnergy type_energy, Double value) {
         this.id = id;
         this.type_energy = type_energy;
         this.value = value;
