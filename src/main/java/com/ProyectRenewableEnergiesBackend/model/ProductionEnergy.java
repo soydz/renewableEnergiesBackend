@@ -13,11 +13,10 @@ public class ProductionEnergy {
     private TypeEnergy type_energy;
     private Double value;
 
-
     public ProductionEnergy() {
     }
 
-    public ProductionEnergy(int id, TypeEnergy type_energy, Double value) {
+    public ProductionEnergy(Integer id, TypeEnergy type_energy, Double value) {
         this.id = id;
         this.type_energy = type_energy;
         this.value = value;
@@ -46,5 +45,4 @@ public class ProductionEnergy {
     public void setValue(Double value) {
         this.value = value;
     }
-
 }
