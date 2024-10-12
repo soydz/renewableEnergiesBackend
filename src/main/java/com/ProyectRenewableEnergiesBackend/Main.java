@@ -1,4 +1,4 @@
-package com.ProyectRenewableEnergies;
+package com.ProyectRenewableEnergiesBackend;
 
 public class Main {
     public static void main(String[] args) {
