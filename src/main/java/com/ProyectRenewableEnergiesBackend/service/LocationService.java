@@ -22,17 +22,17 @@ public class LocationService {
         return locationRepository.findAll();
     }
 
-    public Optional<Location> getById(int id){
+    public Optional<Location> getById(int id) {
         return locationRepository.findById(id);
     }
 
     public Location updateById(int id, Location location) {
         return locationRepository.findById(id)
                 .map(oldLocation -> {
-                    if(location.getName() != null) {
+                    if (location.getName() != null) {
                         oldLocation.setName(location.getName());
                     }
-                    if(location.getYear() != null) {
+                    if (location.getYear() != null) {
                         oldLocation.setYear(location.getYear());
                     }
                     return locationRepository.save(oldLocation);
@@ -50,5 +50,9 @@ public class LocationService {
 
     public Optional<Location> getLocationsByNameAndYear(String name, Integer year) {
         return locationRepository.findByNameAndYear(name, year);
+    }
+
+    public long getCount() {
+        return locationRepository.count();
     }
 }

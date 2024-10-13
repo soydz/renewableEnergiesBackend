@@ -1,7 +1,5 @@
 package com.ProyectRenewableEnergiesBackend.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,7 +9,7 @@ public class ProductionEnergy {
     private Integer id;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private TypeEnergy type_energy;
+    private TypeEnergy typeEnergy;
     private Double value;
 
     @ManyToOne(targetEntity = Location.class)
@@ -22,7 +20,7 @@ public class ProductionEnergy {
 
     public ProductionEnergy(Integer id, TypeEnergy type_energy, Double value, Location location) {
         this.id = id;
-        this.type_energy = type_energy;
+        this.typeEnergy = type_energy;
         this.value = value;
         this.location = location;
     }
@@ -36,11 +34,11 @@ public class ProductionEnergy {
     }
 
     public TypeEnergy getType_energy() {
-        return type_energy;
+        return typeEnergy;
     }
 
     public void setType_energy(TypeEnergy type_energy) {
-        this.type_energy = type_energy;
+        this.typeEnergy = type_energy;
     }
 
     public Double getValue() {
@@ -57,15 +55,5 @@ public class ProductionEnergy {
 
     public void setLocation(Location location) {
         this.location = location;
-    }
-
-    @Override
-    public String toString() {
-        return "ProductionEnergy{" +
-                "id=" + id +
-                ", type_energy=" + type_energy +
-                ", value=" + value +
-                ", location=" + location +
-                '}';
     }
 }

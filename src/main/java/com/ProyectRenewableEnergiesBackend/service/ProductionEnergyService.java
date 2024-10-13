@@ -1,11 +1,9 @@
 package com.ProyectRenewableEnergiesBackend.service;
 
 import com.ProyectRenewableEnergiesBackend.DTO.ProductionEnergyRequest;
-import com.ProyectRenewableEnergiesBackend.model.ConsumptionEnergy;
 import com.ProyectRenewableEnergiesBackend.model.Location;
 import com.ProyectRenewableEnergiesBackend.model.ProductionEnergy;
 import com.ProyectRenewableEnergiesBackend.model.TypeEnergy;
-import com.ProyectRenewableEnergiesBackend.repository.ConsumptionEnergyRepository;
 import com.ProyectRenewableEnergiesBackend.repository.ProductionEnergyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,14 +28,14 @@ public class ProductionEnergyService {
         return productionEnergyRepository.findAll();
     }
 
-    public Optional<ProductionEnergy> getById(int id){
+    public Optional<ProductionEnergy> getById(int id) {
         return productionEnergyRepository.findById(id);
     }
 
     public ProductionEnergy updateById(int id, ProductionEnergy production) {
         return productionEnergyRepository.findById(id)
                 .map(oldProduction -> {
-                    if(production.getValue() != null) {
+                    if (production.getValue() != null) {
                         oldProduction.setValue(production.getValue());
                     }
                     return productionEnergyRepository.save(oldProduction);
@@ -60,5 +58,13 @@ public class ProductionEnergyService {
         location.ifPresent(productionEnergy::setLocation);
 
         return productionEnergyRepository.save(productionEnergy);
+    }
+
+    public boolean checkProductionExists(TypeEnergy type_energy, Optional<Location> location) {
+        return productionEnergyRepository.existsByTypeEnergyAndLocation(type_energy, location);
+    }
+
+    public long getCount() {
+        return productionEnergyRepository.count();
     }
 }

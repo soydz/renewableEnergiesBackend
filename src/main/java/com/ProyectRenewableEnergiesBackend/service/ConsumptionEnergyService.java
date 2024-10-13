@@ -3,6 +3,7 @@ package com.ProyectRenewableEnergiesBackend.service;
 import com.ProyectRenewableEnergiesBackend.DTO.ConsumptionEnergyRequest;
 import com.ProyectRenewableEnergiesBackend.model.ConsumptionEnergy;
 import com.ProyectRenewableEnergiesBackend.model.Location;
+import com.ProyectRenewableEnergiesBackend.model.TypeEnergy;
 import com.ProyectRenewableEnergiesBackend.repository.ConsumptionEnergyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,14 +27,14 @@ public class ConsumptionEnergyService {
         return consumptionEnergyRepository.findAll();
     }
 
-    public Optional<ConsumptionEnergy> getById(int id){
+    public Optional<ConsumptionEnergy> getById(int id) {
         return consumptionEnergyRepository.findById(id);
     }
 
     public ConsumptionEnergy updateById(int id, ConsumptionEnergy consumption) {
         return consumptionEnergyRepository.findById(id)
                 .map(oldConsumption -> {
-                    if(consumption.getValue() != null) {
+                    if (consumption.getValue() != null) {
                         oldConsumption.setValue(consumption.getValue());
                     }
                     return consumptionEnergyRepository.save(oldConsumption);
@@ -56,5 +57,13 @@ public class ConsumptionEnergyService {
         location.ifPresent(consumptionEnergy::setLocation);
 
         return consumptionEnergyRepository.save(consumptionEnergy);
+    }
+
+    public boolean checkConsumptionExists(TypeEnergy type_energy, Optional<Location> location) {
+        return consumptionEnergyRepository.existsByTypeEnergyAndLocation(type_energy, location);
+    }
+
+    public long getCount() {
+        return consumptionEnergyRepository.count();
     }
 }
