@@ -21,6 +21,9 @@ public class ConsumptionEnergyController {
     @PostMapping
     public ResponseEntity<ConsumptionEnergy> add(@RequestBody ConsumptionEnergyRequest consumption) {
         ConsumptionEnergy newConsumptionEnergy = consumptionEnergyService.CreateconsumptionEnergy(consumption);
+        if(newConsumptionEnergy == null) {
+            return new ResponseEntity<>(newConsumptionEnergy, HttpStatus.CONFLICT);
+        }
         return new ResponseEntity<>(newConsumptionEnergy, HttpStatus.CREATED);
     }
 

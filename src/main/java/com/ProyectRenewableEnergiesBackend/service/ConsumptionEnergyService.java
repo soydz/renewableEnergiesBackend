@@ -51,6 +51,10 @@ public class ConsumptionEnergyService {
                 consumption.getCountry(), consumption.getYear()
         );
 
+        if (checkConsumptionExists(consumption.getType_energy(), location)) {
+            return null;
+        }
+
         ConsumptionEnergy consumptionEnergy = new ConsumptionEnergy();
         consumptionEnergy.setType_energy(consumption.getType_energy());
         consumptionEnergy.setValue(consumption.getValue());

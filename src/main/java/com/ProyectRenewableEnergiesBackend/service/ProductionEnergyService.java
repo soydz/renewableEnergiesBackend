@@ -52,6 +52,10 @@ public class ProductionEnergyService {
                 production.getCountry(), production.getYear()
         );
 
+        if (checkProductionExists(production.getType_energy(), location)) {
+            return null;
+        }
+
         ProductionEnergy productionEnergy = new ProductionEnergy();
         productionEnergy.setType_energy(production.getType_energy());
         productionEnergy.setValue(production.getValue());

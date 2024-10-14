@@ -50,14 +50,4 @@ public class ProductionEnergyRequest {
     public void setValue(Double value) {
         this.value = value;
     }
-
-    @Override
-    public String toString() {
-        return "ProductionEnergyRequest{" +
-                "country='" + country + '\'' +
-                ", year=" + year +
-                ", type_energy=" + type_energy +
-                ", value=" + value +
-                '}';
-    }
 }

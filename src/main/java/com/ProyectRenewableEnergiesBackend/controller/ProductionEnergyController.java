@@ -25,6 +25,9 @@ public class ProductionEnergyController {
     @PostMapping
     public ResponseEntity<ProductionEnergy> add(@RequestBody ProductionEnergyRequest production) {
         ProductionEnergy newProductionEnergy = productionEnergyService.createProductionEnergy(production);
+        if(newProductionEnergy == null) {
+            return new ResponseEntity<>(newProductionEnergy, HttpStatus.CONFLICT);
+        }
         return new ResponseEntity<>(newProductionEnergy, HttpStatus.CREATED);
     }
 

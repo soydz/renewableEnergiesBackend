@@ -20,6 +20,9 @@ public class LocationController {
     @PostMapping
     public ResponseEntity<Location> add(@RequestBody Location location) {
         Location newLocation = locationService.add(location);
+        if(newLocation == null) {
+            return new ResponseEntity<>(newLocation, HttpStatus.CONFLICT);
+        }
         return new ResponseEntity<>(newLocation, HttpStatus.CREATED);
     }
 

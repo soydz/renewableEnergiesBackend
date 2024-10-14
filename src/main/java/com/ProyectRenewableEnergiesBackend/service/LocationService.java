@@ -15,7 +15,10 @@ public class LocationService {
     private LocationRepository locationRepository;
 
     public Location add(Location location) {
-        return locationRepository.save(location);
+        if(!existsByNameAndYear(location.getName(), location.getYear())) {
+            return locationRepository.save(location);
+        }
+        return null;
     }
 
     public List<Location> getAll() {
