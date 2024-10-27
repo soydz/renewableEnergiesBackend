@@ -1,5 +1,6 @@
 package com.ProyectRenewableEnergiesBackend.controller;
 
+import com.ProyectRenewableEnergiesBackend.DTO.UserLogin;
 import com.ProyectRenewableEnergiesBackend.DTO.UserResponse;
 import com.ProyectRenewableEnergiesBackend.model.User;
 import com.ProyectRenewableEnergiesBackend.service.UserService;
@@ -13,28 +14,40 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserResponse> add(@RequestBody User user) {
+    public ResponseEntity<User> add(@RequestBody User user) {
         User newUser = userService.add(user);
-        UserResponse userResponse = userService.createUserResponse(newUser);
-        return new ResponseEntity<>(userResponse, HttpStatus.CREATED);
+        if(newUser == null) {
+            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<UserResponse> login(@RequestBody UserLogin dataLogin) {
+        UserResponse userResponse = userService.login(dataLogin);
+        if(userResponse == null) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(userResponse, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<UserResponse>> getAll() {
-        List<UserResponse> userList = userService.getAll();
+    public ResponseEntity<List<User>> getAll() {
+        List<User> userList = userService.getAll();
         return new ResponseEntity<>(userList, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> getById(@PathVariable("id") String username) {
-        Optional<UserResponse> userResponse = userService.getById(username);
-        return userResponse.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<User> getById(@PathVariable("id") String username) {
+        Optional<User> user = userService.getById(username);
+        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
@@ -42,4 +55,6 @@ public class UserController {
         userService.deleteById(username);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+
 }
