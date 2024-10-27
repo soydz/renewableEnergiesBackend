@@ -16,12 +16,29 @@ public class EnergyDTOController {
 
     @Autowired
     EnergyDTOService energyDTOService;
+/*
+    @GetMapping
+    public ResponseEntity<Page<EnergyDTO>> get(
+            @RequestParam(name = "page") Integer page) {
+        int size = 10;
+        Page<EnergyDTO> data = energyDTOService.getForPage(page, size);
+        return new ResponseEntity<>(data, HttpStatus.OK);
+    }
+
+ */
 
     @GetMapping
     public ResponseEntity<Page<EnergyDTO>> get(
-            @RequestParam(name = "page", defaultValue = "1") Integer page) {
+            @RequestParam(name = "page") Integer page,
+            @RequestParam(name = "typeEnergy") TypeEnergy typeEnergy,
+            @RequestParam(name = "year") Integer year
+        ) {
         int size = 10;
-        Page<EnergyDTO> data = energyDTOService.getForPage(page, size);
+        if(year == 0){
+            Page<EnergyDTO> data = energyDTOService.getForType(page, size, typeEnergy);
+            return new ResponseEntity<>(data, HttpStatus.OK);
+        }
+        Page<EnergyDTO> data = energyDTOService.getForTypeAndYear(page, size, typeEnergy, year);
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
