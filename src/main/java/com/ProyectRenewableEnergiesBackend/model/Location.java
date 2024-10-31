@@ -15,6 +15,7 @@ public class Location {
     private String name;
     @Column(nullable = false)
     private Integer year;
+    private String region;
 
     @OneToMany(targetEntity = ProductionEnergy.class, fetch = FetchType.LAZY, mappedBy = "location")
     @JsonIgnore
@@ -25,6 +26,15 @@ public class Location {
     private List<ConsumptionEnergy> consumptionEnergyList;
 
     public Location() {
+    }
+
+    public Location(Integer id, String name, Integer year, String region, List<ProductionEnergy> productionEnergyList, List<ConsumptionEnergy> consumptionEnergyList) {
+        this.id = id;
+        this.name = name;
+        this.year = year;
+        this.region = region;
+        this.productionEnergyList = productionEnergyList;
+        this.consumptionEnergyList = consumptionEnergyList;
     }
 
     public Location(Integer id, String name, Integer year, List<ProductionEnergy> productionEnergyList, List<ConsumptionEnergy> consumptionEnergyList) {
@@ -57,6 +67,14 @@ public class Location {
 
     public void setYear(Integer year) {
         this.year = year;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 
     public List<ProductionEnergy> getProductionEnergyList() {
