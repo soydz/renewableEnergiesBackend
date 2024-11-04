@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -30,12 +31,12 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserResponse> login(@RequestBody UserLogin dataLogin) {
-        UserResponse userResponse = userService.login(dataLogin);
-        if(userResponse == null) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    public ResponseEntity<Map<String, String>> login(@RequestBody UserLogin dataLogin) {
+        String userToken = userService.login(dataLogin);
+        if(userToken == null) {
+            return new ResponseEntity<>(Map.of("message","Credenciales inválidas"), HttpStatus.UNAUTHORIZED);
         }
-        return new ResponseEntity<>(userResponse, HttpStatus.OK);
+        return new ResponseEntity<>(Map.of("token", userToken), HttpStatus.OK);
     }
 
     @GetMapping
@@ -50,11 +51,16 @@ public class UserController {
         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @PutMapping
+    public ResponseEntity<Map<String, String>> updateById(@RequestBody User user) {
+        String userUpdateToken = userService.updateById(user);
+        return new ResponseEntity<>(Map.of("token", userUpdateToken), HttpStatus.OK);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<User> deleteById(@PathVariable("id") String username) {
         userService.deleteById(username);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 
 }

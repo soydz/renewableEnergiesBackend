@@ -61,4 +61,11 @@ public class UserResponse {
     public void setPermissions(List<Permissions> permissions) {
         this.permissions = permissions;
     }
+
+    @Override
+    public String toString() {
+        return "userName='" + userName + ", name='" + name  +
+                ", lastName='" + lastName + ", email='" + email +
+                ", permissions=" + permissions + '}';
+    }
 }
