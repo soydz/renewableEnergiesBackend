@@ -18,9 +18,9 @@ public class ConsumptionEnergy {
     public ConsumptionEnergy() {
     }
 
-    public ConsumptionEnergy(Integer id, TypeEnergy type_energy, Double value, Location location) {
+    public ConsumptionEnergy(Integer id, TypeEnergy typeEnergy, Double value, Location location) {
         this.id = id;
-        this.typeEnergy = type_energy;
+        this.typeEnergy = typeEnergy;
         this.value = value;
         this.location = location;
     }
@@ -33,12 +33,12 @@ public class ConsumptionEnergy {
         this.id = id;
     }
 
-    public TypeEnergy getType_energy() {
+    public TypeEnergy getTypeEnergy() {
         return typeEnergy;
     }
 
-    public void setType_energy(TypeEnergy type_energy) {
-        this.typeEnergy = type_energy;
+    public void setTypeEnergy(TypeEnergy typeEnergy) {
+        this.typeEnergy = typeEnergy;
     }
 
     public Double getValue() {

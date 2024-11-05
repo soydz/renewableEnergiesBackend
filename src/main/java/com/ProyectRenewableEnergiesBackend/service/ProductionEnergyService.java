@@ -52,20 +52,20 @@ public class ProductionEnergyService {
                 production.getCountry(), production.getYear()
         );
 
-        if (checkProductionExists(production.getType_energy(), location)) {
+        if (checkProductionExists(production.getTypeEnergy(), location)) {
             return null;
         }
 
         ProductionEnergy productionEnergy = new ProductionEnergy();
-        productionEnergy.setType_energy(production.getType_energy());
+        productionEnergy.setTypeEnergy(production.getTypeEnergy());
         productionEnergy.setValue(production.getValue());
         location.ifPresent(productionEnergy::setLocation);
 
         return productionEnergyRepository.save(productionEnergy);
     }
 
-    public boolean checkProductionExists(TypeEnergy type_energy, Optional<Location> location) {
-        return productionEnergyRepository.existsByTypeEnergyAndLocation(type_energy, location);
+    public boolean checkProductionExists(TypeEnergy typeEnergy, Optional<Location> location) {
+        return productionEnergyRepository.existsByTypeEnergyAndLocation(typeEnergy, location);
     }
 
     public long getCount() {
