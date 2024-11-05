@@ -51,20 +51,20 @@ public class ConsumptionEnergyService {
                 consumption.getCountry(), consumption.getYear()
         );
 
-        if (checkConsumptionExists(consumption.getType_energy(), location)) {
+        if (checkConsumptionExists(consumption.getTypeEnergy(), location)) {
             return null;
         }
 
         ConsumptionEnergy consumptionEnergy = new ConsumptionEnergy();
-        consumptionEnergy.setType_energy(consumption.getType_energy());
+        consumptionEnergy.setTypeEnergy(consumption.getTypeEnergy());
         consumptionEnergy.setValue(consumption.getValue());
         location.ifPresent(consumptionEnergy::setLocation);
 
         return consumptionEnergyRepository.save(consumptionEnergy);
     }
 
-    public boolean checkConsumptionExists(TypeEnergy type_energy, Optional<Location> location) {
-        return consumptionEnergyRepository.existsByTypeEnergyAndLocation(type_energy, location);
+    public boolean checkConsumptionExists(TypeEnergy typeEnergy, Optional<Location> location) {
+        return consumptionEnergyRepository.existsByTypeEnergyAndLocation(typeEnergy, location);
     }
 
     public long getCount() {

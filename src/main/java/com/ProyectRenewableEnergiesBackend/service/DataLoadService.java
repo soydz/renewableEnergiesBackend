@@ -166,7 +166,7 @@ public class DataLoadService implements CommandLineRunner {
 
     public ConsumptionEnergy createConsumptionEnergy(Optional<Location> location, TypeEnergy typeEnergy, double value) {
         ConsumptionEnergy consumption = new ConsumptionEnergy();
-        consumption.setType_energy(typeEnergy);
+        consumption.setTypeEnergy(typeEnergy);
         consumption.setValue(value);
         location.ifPresent(consumption::setLocation);
         return consumption;
@@ -174,7 +174,7 @@ public class DataLoadService implements CommandLineRunner {
 
     public ProductionEnergy createProductionEnergy(Optional<Location> location, TypeEnergy typeEnergy, double value) {
         ProductionEnergy production = new ProductionEnergy();
-        production.setType_energy(typeEnergy);
+        production.setTypeEnergy(typeEnergy);
         production.setValue(value);
         location.ifPresent(production::setLocation);
         return production;

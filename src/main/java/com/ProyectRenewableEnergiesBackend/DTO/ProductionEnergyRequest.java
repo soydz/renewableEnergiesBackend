@@ -6,16 +6,16 @@ public class ProductionEnergyRequest {
     private String country;
     private Integer year;
 
-    private TypeEnergy type_energy;
+    private TypeEnergy typeEnergy;
     private Double value;
 
     public ProductionEnergyRequest() {
     }
 
-    public ProductionEnergyRequest(String country, Integer year, TypeEnergy type_energy, Double value) {
+    public ProductionEnergyRequest(String country, Integer year, TypeEnergy typeEnergy, Double value) {
         this.country = country;
         this.year = year;
-        this.type_energy = type_energy;
+        this.typeEnergy = typeEnergy;
         this.value = value;
     }
 
@@ -35,12 +35,12 @@ public class ProductionEnergyRequest {
         this.year = year;
     }
 
-    public TypeEnergy getType_energy() {
-        return type_energy;
+    public TypeEnergy getTypeEnergy() {
+        return typeEnergy;
     }
 
-    public void setType_energy(TypeEnergy type_energy) {
-        this.type_energy = type_energy;
+    public void setTypeEnergy(TypeEnergy typeEnergy) {
+        this.typeEnergy = typeEnergy;
     }
 
     public Double getValue() {
