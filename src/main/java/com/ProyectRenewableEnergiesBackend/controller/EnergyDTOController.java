@@ -16,16 +16,6 @@ public class EnergyDTOController {
 
     @Autowired
     EnergyDTOService energyDTOService;
-/*
-    @GetMapping
-    public ResponseEntity<Page<EnergyDTO>> get(
-            @RequestParam(name = "page") Integer page) {
-        int size = 10;
-        Page<EnergyDTO> data = energyDTOService.getForPage(page, size);
-        return new ResponseEntity<>(data, HttpStatus.OK);
-    }
-
- */
 
     @GetMapping
     public ResponseEntity<Page<EnergyDTO>> get(
